@@ -1,0 +1,26 @@
+{
+  "name": "api",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/express": "^5.0.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@leichtgewicht/dns-packet": "^6.0.3",
+    "dayjs": "^1.11.18",
+    "dns-query": "^0.11.2",
+    "dotenv": "^17.2.3",
+    "email-regex": "^6.1.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun --watch run ./index.ts"
+  }
+}
