@@ -1,4 +1,4 @@
-export interface EmailDomain {
+export default interface EmailDomain {
   domain: string;
   mx_records: boolean;
   disposable: boolean;

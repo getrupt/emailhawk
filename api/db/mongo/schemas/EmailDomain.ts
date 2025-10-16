@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import type { EmailDomain as IEmailDomain } from "../../../../common/models/EmailDomain";
+import type IEmailDomain from "../../../../common/models/EmailDomain";
 
 const emailDomainSchema = new mongoose.Schema(
   {

@@ -1,5 +1,6 @@
 import { query, wellknown } from "dns-query";
 import emailRegex from "email-regex";
+import type IEmailDomain from "../../common/models/EmailDomain";
 import { EmailDomain } from "../db/mongo/schemas/EmailDomain";
 import dayjs from "dayjs";
 import type { Answer } from "@leichtgewicht/dns-packet";
@@ -51,7 +52,7 @@ export async function updateEmailDomain({
   noSync = false,
 }: {
   domain: string;
-  data: Partial<EmailDomain>;
+  data: Partial<IEmailDomain>;
   noSync?: boolean;
 }) {
   const emailDomain = await EmailDomain.findOneAndUpdate(
