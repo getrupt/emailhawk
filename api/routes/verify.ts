@@ -1,9 +1,9 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
-import { validationMiddleware } from "../middlewares/validation";
+import { expressValidatorMiddleware } from "../middlewares/expressValidatorMiddleware";
 import { checkSchema } from "express-validator";
 import passport from "passport";
-import { checkVerifyUsageAccess } from "../middlewares/verifyUsage";
+import { checkVerifyUsageAccess } from "../middlewares/verifyUsageMiddleware";
 import { verifyEmailDomain } from "../controllers/EmailDomainController";
 
 const router = Router();
@@ -16,7 +16,7 @@ router.post(
     },
     ["body"]
   ),
-  validationMiddleware,
+  expressValidatorMiddleware,
   passport.authenticate("api_key", { session: false }),
   checkVerifyUsageAccess,
   async (

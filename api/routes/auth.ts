@@ -3,7 +3,7 @@ import type { Request, Response } from "express";
 import { checkSchema } from "express-validator";
 import passport from "passport";
 import { login, register } from "../controllers/AuthController";
-import { validationMiddleware } from "../middlewares/validation";
+import { expressValidatorMiddleware } from "../middlewares/expressValidatorMiddleware";
 import { getUserByEmail } from "../controllers/UserController";
 import { deleteAccessTokenByUserId } from "../controllers/AccessTokenController";
 import { ipFromRequest } from "../controllers/RequestUtilController";
@@ -34,7 +34,7 @@ router.post(
     },
     ["body"]
   ),
-  validationMiddleware,
+  expressValidatorMiddleware,
   async (
     req: Request<
       {},
@@ -81,7 +81,7 @@ router.post(
     },
     ["body"]
   ),
-  validationMiddleware,
+  expressValidatorMiddleware,
   async (
     req: Request<
       {},
