@@ -1,10 +1,11 @@
 import type { HydratedDocument } from "mongoose";
-import type User from "../../common/models/User";
+import type User from "../models/User";
 
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
       MONGO_URI: string;
+      VERIFY_USAGE_LIMIT: string;
     }
   }
   namespace Express {

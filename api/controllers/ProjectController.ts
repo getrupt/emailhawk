@@ -1,9 +1,10 @@
 import Project from "../db/mongo/schemas/Project";
-import type User from "../../common/models/User";
+import type User from "../models/User";
 import {
   createStripeCustomer,
   createStripeSubscription,
 } from "./StripeController";
+import { createVerifyUsage } from "./VerifyUsageController";
 
 export async function createProject({
   name,
@@ -33,14 +34,14 @@ export async function createProject({
   project.users.addToSet(user.id);
   await project.save();
 
-  // await createPromptUsage({
-  //   projectId: project.id,
-  //   count: 0,
-  //   periodStart: new Date(subscription.current_period_start * 1000),
-  //   periodEnd: new Date(subscription.current_period_end * 1000),
-  // });
+  const verifyUsage = await createVerifyUsage({
+    projectId: project.id,
+    count: 0,
+    periodStart: new Date(subscription.current_period_start * 1000),
+    periodEnd: new Date(subscription.current_period_end * 1000),
+  });
 
-  return project;
+  return { project, verifyUsage };
 }
 
 export async function getProjectsByUserId(userId: string) {

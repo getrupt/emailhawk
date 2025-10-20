@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import type IApiKey from "../../../../common/models/ApiKey";
+import type IApiKey from "../../../models/ApiKey";
 
 const apiKeySchema = new mongoose.Schema(
   {

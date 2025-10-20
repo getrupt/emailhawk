@@ -1,6 +1,6 @@
 import { query, wellknown } from "dns-query";
 import emailRegex from "email-regex";
-import type IEmailDomain from "../../common/models/EmailDomain";
+import type IEmailDomain from "../models/EmailDomain";
 import { EmailDomain } from "../db/mongo/schemas/EmailDomain";
 import dayjs from "dayjs";
 import type { Answer } from "@leichtgewicht/dns-packet";
@@ -158,7 +158,7 @@ export function validateEmailFormat(email: string) {
   return emailRegex({ exact: true }).test(email);
 }
 
-export async function validateEmailDomain({
+export async function verifyEmailDomain({
   email,
   timeout = 4000,
   forceSync = false,

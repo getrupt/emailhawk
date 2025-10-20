@@ -1,13 +1,8 @@
 import mongoose from "mongoose";
-import type IUser from "../../../../common/models/User";
+import type IUser from "../../../models/User";
 
 const userSchema = new mongoose.Schema(
   {
-    projectId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Project",
-      required: true,
-    },
     firstName: {
       type: String,
       required: true,

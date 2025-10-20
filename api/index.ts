@@ -2,6 +2,8 @@ import express from "express";
 import startMongo from "./db/mongo";
 import adminRouter from "./routes/admin";
 import authRouter from "./routes/auth";
+import verifyRouter from "./routes/verify";
+import projectRouter from "./routes/projects";
 import passport from "passport";
 import { passportBearerStrategy, passportApiKeyStrategy } from "./controllers/PassportController";
 
@@ -15,6 +17,8 @@ passport.use("api_key", passportApiKeyStrategy);
 
 app.use("/admin", adminRouter);
 app.use("/auth", authRouter);
+app.use("/verify", verifyRouter);
+app.use("/projects", projectRouter);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);

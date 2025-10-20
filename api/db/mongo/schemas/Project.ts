@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import type IProject from "../../../../common/models/Project";
+import type IProject from "../../../models/Project";
 
 const projectSchema = new mongoose.Schema(
   {

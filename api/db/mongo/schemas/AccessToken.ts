@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import type IAccessToken from "../../../../common/models/AccessToken";
+import type IAccessToken from "../../../models/AccessToken";
 
 const accessTokenSchema = new mongoose.Schema(
   {

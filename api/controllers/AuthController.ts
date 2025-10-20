@@ -25,15 +25,15 @@ export async function register(
 ) {
   const user = await createUser(firstName, lastName, username, password);
 
-  const project = await createProject({
+  const { project, verifyUsage } = await createProject({
     name: "Default Project",
     user,
   });
 
-  await createApiKey({
+  const apiKey = await createApiKey({
     projectId: project.id,
     name: "Default API Key",
   });
 
-  return user;
+  return { user, project, apiKey, verifyUsage };
 }

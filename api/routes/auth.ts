@@ -6,6 +6,10 @@ import { login, register } from "../controllers/AuthController";
 import { validationMiddleware } from "../middlewares/validation";
 import { getUserByEmail } from "../controllers/UserController";
 import { deleteAccessTokenByUserId } from "../controllers/AccessTokenController";
+import { ipFromRequest } from "../controllers/RequestUtilController";
+import RuptCore from "@ruptjs/core";
+
+const ruptCore = new RuptCore(`${process.env.RUPT_SECRET_KEY}`);
 
 const router = Router();
 
@@ -32,7 +36,17 @@ router.post(
   ),
   validationMiddleware,
   async (
-    req: Request<{}, {}, { username: string; password: string }>,
+    req: Request<
+      {},
+      {},
+      {
+        username: string;
+        password: string;
+        challenge?: string;
+        code?: string;
+        fingerprint?: string[];
+      }
+    >,
     res: Response
   ) => {
     const login_result = await login(req.body.username, req.body.password);
@@ -40,15 +54,15 @@ router.post(
       res.status(401).json({ errors: [{ msg: "Invalid credentials" }] });
       return;
     }
-    // if (!req.body.challenge && !req.body.code && req.body.fingerprint) {
-    //   await ruptCore.evaluate({
-    //     action: "login",
-    //     user: login_result.user.id,
-    //     email: login_result.user.email,
-    //     fingerprint: req.body.fingerprint,
-    //     ip: ipFromRequest(req),
-    //   });
-    // }
+    if (!req.body.challenge && !req.body.code && req.body.fingerprint) {
+      await ruptCore.evaluate({
+        action: "login",
+        user: login_result.user.id,
+        email: login_result.user.email,
+        fingerprint: req.body.fingerprint,
+        ip: ipFromRequest(req),
+      });
+    }
     res.json(login_result);
   }
 );
@@ -77,6 +91,9 @@ router.post(
         password: string;
         first_name: string;
         last_name: string;
+        fingerprint?: string[];
+        challenge?: string;
+        code?: string;
       }
     >,
     res: Response
@@ -86,14 +103,14 @@ router.post(
       if (preExistingUser) {
         throw Error("duplicate");
       }
-      // if (req.body.fingerprint) {
-      //   await ruptCore.evaluate({
-      //     action: "signup",
-      //     email: req.body.username,
-      //     fingerprint: req.body.fingerprint,
-      //     ip: ipFromRequest(req),
-      //   });
-      // }
+      if (req.body.fingerprint) {
+        await ruptCore.evaluate({
+          action: "signup",
+          email: req.body.username,
+          fingerprint: req.body.fingerprint,
+          ip: ipFromRequest(req),
+        });
+      }
 
       await register(
         req.body.first_name,
