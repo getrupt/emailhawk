@@ -166,7 +166,16 @@ export async function verifyEmailDomain({
   email: string;
   timeout?: number;
   forceSync?: boolean;
-}) {
+}): Promise<{
+  domain?: string;
+  mx_records: boolean;
+  disposable: boolean;
+  webmail: boolean;
+  status: string;
+  regexp: boolean;
+  smtp_server: boolean;
+  smtp_check: boolean;
+}> {
   if (!validateEmailFormat(email)) {
     return {
       ...validateEmailDomainDefaultResponse,
@@ -239,6 +248,7 @@ export async function verifyEmailDomain({
 
   return {
     ...validateEmailDomainDefaultResponse,
+    domain,
     status,
     regexp: true,
     disposable: emailDomain.disposable,

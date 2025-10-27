@@ -1,11 +1,12 @@
 import { hash } from "./EncryptionController";
 import User from "../db/mongo/schemas/User";
+import mongoose from "mongoose";
 
 export async function createUser(
   firstName: string,
   lastName: string,
   email: string,
-  password: string
+  password: string,
 ) {
   const user = new User();
   user.firstName = firstName;

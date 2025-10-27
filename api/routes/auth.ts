@@ -25,7 +25,7 @@ router.post(
   "/login",
   checkSchema(
     {
-      username: { isEmail: true, normalizeEmail: true },
+      email: { isEmail: true, normalizeEmail: true },
       password: { isString: true },
       challenge: { optional: true, isMongoId: true },
       code: { optional: true, isString: true },
@@ -40,7 +40,7 @@ router.post(
       {},
       {},
       {
-        username: string;
+        email: string;
         password: string;
         challenge?: string;
         code?: string;
@@ -49,7 +49,7 @@ router.post(
     >,
     res: Response
   ) => {
-    const login_result = await login(req.body.username, req.body.password);
+    const login_result = await login(req.body.email, req.body.password);
     if (!login_result) {
       res.status(401).json({ errors: [{ msg: "Invalid credentials" }] });
       return;
@@ -71,7 +71,7 @@ router.post(
   "/register",
   checkSchema(
     {
-      username: { isEmail: true, normalizeEmail: true },
+      email: { isEmail: true, normalizeEmail: true },
       first_name: { isString: true },
       password: { isString: true },
       invite: { optional: true, isMongoId: true },
@@ -87,7 +87,7 @@ router.post(
       {},
       {},
       {
-        username: string;
+        email: string;
         password: string;
         first_name: string;
         last_name: string;
@@ -99,14 +99,14 @@ router.post(
     res: Response
   ) => {
     try {
-      const preExistingUser = await getUserByEmail(req.body.username);
+      const preExistingUser = await getUserByEmail(req.body.email);
       if (preExistingUser) {
         throw Error("duplicate");
       }
       if (req.body.fingerprint) {
         await ruptCore.evaluate({
           action: "signup",
-          email: req.body.username,
+          email: req.body.email,
           fingerprint: req.body.fingerprint,
           ip: ipFromRequest(req),
         });
@@ -115,11 +115,11 @@ router.post(
       await register(
         req.body.first_name,
         req.body.last_name,
-        req.body.username,
+        req.body.email,
         req.body.password
       );
 
-      const login_result = await login(req.body.username, req.body.password);
+      const login_result = await login(req.body.email, req.body.password);
       if (!login_result) {
         res.status(401).json({ errors: [{ msg: "Invalid credentials" }] });
         return;

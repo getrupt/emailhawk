@@ -1,12 +1,13 @@
 import AccessToken from "../db/mongo/schemas/AccessToken";
 import { generateRandomSecureToken } from "./EncryptionController";
+import mongoose from "mongoose";
 
 export async function createAccessToken(user_id: string) {
   const accessToken = new AccessToken();
-  accessToken.userId = user_id;
+  accessToken.userId = new mongoose.Types.ObjectId(user_id);
   accessToken.token = await generateRandomSecureToken();
   await accessToken.save();
-  return accessToken;
+  return accessToken.token;
 }
 
 export async function getAccessToken(token: string) {

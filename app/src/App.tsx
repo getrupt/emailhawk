@@ -1,8 +1,19 @@
+import axios from "axios";
+import Cookies from "universal-cookie";
 import "./index.css";
 import { APITester } from "./APITester";
 
 import logo from "./logo.svg";
 import reactLogo from "./react.svg";
+
+const cookies = new Cookies();
+
+axios.defaults.baseURL = "http://localhost:8006";
+axios.defaults.withCredentials = true;
+const token = cookies.get("token");
+if (token) {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+}
 
 export function App() {
   return (

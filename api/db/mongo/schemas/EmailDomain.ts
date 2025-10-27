@@ -19,10 +19,6 @@ const emailDomainSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    unknown: {
-      type: Boolean,
-      default: false,
-    },
     syncedAt: {
       type: Date,
       default: null,

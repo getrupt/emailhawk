@@ -7,10 +7,34 @@
 
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
+import { createBrowserRouter } from "react-router";
+import { RouterProvider } from "react-router/dom";
+import { LoginSimple } from "./pages/login";
+import { RegisterSimple } from "./pages/register";
+import { Dashboard } from "./pages/dashboard";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/login",
+    element: <LoginSimple />,
+  },
+  {
+    path: "/register",
+    element: <RegisterSimple />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
+]);
 
 function start() {
   const root = createRoot(document.getElementById("root")!);
-  root.render(<App />);
+  root.render(<RouterProvider router={router} />);
 }
 
 if (document.readyState === "loading") {

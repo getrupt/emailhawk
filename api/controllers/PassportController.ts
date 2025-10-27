@@ -2,7 +2,7 @@ import { Strategy as BearerStrategy } from "passport-http-bearer";
 import { getAccessToken } from "./AccessTokenController";
 import { getUserById } from "./UserController";
 import { getApiKeyByKey } from "./ApiKeyController";
-import { getProjectById } from "./ProjectController";
+import { getProjectById, getProjectsByUserId } from "./ProjectController";
 
 export const passportBearerStrategy = new BearerStrategy(
   async (token, done) => {
@@ -15,7 +15,11 @@ export const passportBearerStrategy = new BearerStrategy(
       if (!user) {
         return done(null, false);
       }
-      return done(null, user);
+      const projects = await getProjectsByUserId(user?.id);
+      return done(null, {
+        ...user,
+        projects,
+      });
     } catch (err) {
       return done(err, null);
     }
@@ -33,7 +37,10 @@ export const passportApiKeyStrategy = new BearerStrategy(
       if (!project) {
         return done(null, false);
       }
-      return done(null, project);
+      return done(null, {
+        ...(project?.toJSON()),
+        apiKey,
+      });
     } catch (err) {
       return done(err, null);
     }

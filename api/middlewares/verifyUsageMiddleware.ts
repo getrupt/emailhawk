@@ -1,16 +1,18 @@
 import type { Request, Response, NextFunction } from "express";
 import { chargeVerifyUsage } from "../controllers/VerifyUsageController";
 import type Project from "../models/Project";
+import type ApiKey from "../models/ApiKey";
+import type { HydratedDocument } from "mongoose";
 
 export const checkVerifyUsageAccess = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const project = req.user as Project;
+  const project = req.user as HydratedDocument<Project>;
   try {
     await chargeVerifyUsage({
-      projectId: project.id,
+      projectId: project._id.toString(),
       stripeCustomerId: project.stripeCustomerId,
     });
   } catch (error) {

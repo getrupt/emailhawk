@@ -11,14 +11,31 @@
     "build": "bun run build.ts"
   },
   "dependencies": {
+    "@internationalized/date": "^3.8.2",
+    "@react-stately/utils": "^3.10.8",
+    "@tailwindcss/typography": "^0.5.19",
+    "@untitledui/file-icons": "^0.0.9",
+    "@untitledui/icons": "^0.0.19",
+    "axios": "^1.12.2",
     "bun-plugin-tailwind": "^0.0.14",
     "react": "^19",
+    "react-aria": "^3.42.0",
+    "react-aria-components": "^1.12.0",
     "react-dom": "^19",
-    "tailwindcss": "^4.0.6"
+    "react-router": "^7.9.4",
+    "recharts": "^3.1.2",
+    "swr": "^2.3.6",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.0.6",
+    "tailwindcss-animate": "^1.0.7",
+    "tailwindcss-react-aria-components": "^2.0.1",
+    "universal-cookie": "^8.0.1"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.15",
+    "@types/bun": "latest",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/bun": "latest"
+    "postcss": "^8.5.6"
   }
 }

@@ -6,6 +6,8 @@
   "devDependencies": {
     "@faker-js/faker": "^10.1.0",
     "@types/bun": "^1.3.0",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/passport-http-bearer": "^1.0.42"
   },
@@ -15,6 +17,8 @@
   "dependencies": {
     "@leichtgewicht/dns-packet": "^6.0.3",
     "@ruptjs/core": "^0.1.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dayjs": "^1.11.18",
     "dns-query": "^0.11.2",
