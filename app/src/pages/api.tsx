@@ -10,6 +10,7 @@ import axios from "axios";
 import Project from "@/models/Project";
 import { cx } from "@/utils/cx";
 import { APICode } from "@/components/custom/api-code";
+import { APITable } from "@/components/custom/api-table";
 
 export const API = () => {
   const cookies = new Cookies();
@@ -74,6 +75,12 @@ export const API = () => {
           <div className="flex flex-col gap-6 px-4 lg:flex-row lg:gap-8 lg:px-8 relative min-w-[calc(100%-120px)]">
             {projects[0] && (
               <DashboardUsage projectId={projects[0]._id} mutate={mutateCount} />
+            )}
+          </div>
+
+          <div className="flex flex-col gap-6 px-4 lg:flex-row lg:gap-8 lg:px-8 relative w-full">
+            {projects[0] && (
+              <APITable projectId={projects[0]._id} />
             )}
           </div>
 

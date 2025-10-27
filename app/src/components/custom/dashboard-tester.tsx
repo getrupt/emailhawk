@@ -66,6 +66,7 @@ export const DashboardTester = ({ projectId, onSuccess }: { projectId: Project["
         </div>
         <div className="flex gap-3">
           <Button type="submit" size="md">Verify</Button>
+          <Button color="secondary" size="md" href="/api">Use API</Button>
         </div>
       </Form>
     </div>
