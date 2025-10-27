@@ -12,6 +12,7 @@ import { RouterProvider } from "react-router/dom";
 import { LoginSimple } from "./pages/login";
 import { RegisterSimple } from "./pages/register";
 import { Dashboard } from "./pages/dashboard";
+import { API } from "./pages/api";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+  },
+  {
+    path: "/api",
+    element: <API />,
   },
 ]);
 

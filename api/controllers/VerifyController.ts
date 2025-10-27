@@ -10,7 +10,6 @@ export async function getVerifications({
   page?: number;
   per?: number;
 }) {
-  console.log('projectId', projectId, page, per);
   return await Verify.find(
     {
       projectId: new mongoose.Types.ObjectId(projectId),
@@ -18,6 +17,16 @@ export async function getVerifications({
     null,
     { limit: per, skip: (page - 1) * per, sort: { createdAt: -1 } }
   );
+}
+
+export async function getVerificationsCount({
+  projectId,
+}: {
+  projectId: string;
+}) {
+  return await Verify.countDocuments({
+    projectId: new mongoose.Types.ObjectId(projectId),
+  });
 }
 
 export async function createVerification({

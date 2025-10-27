@@ -32,12 +32,16 @@ export const DashboardTable = ({
   });
 
   const [verifications, setVerifications] = useState<Verify[]>([]);
+  const [page, setPage] = useState(1);
+  const [per, setPer] = useState(10);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     axios
-      .get(`/projects/${projectId}/verify`)
+      .get(`/projects/${projectId}/verify?page=${page}&per=${per}`)
       .then((response) => {
-        setVerifications(response.data);
+        setVerifications(response.data.docs);
+        setTotal(response.data.total);
       })
       .catch((err) => {
         console.error(err);
@@ -152,11 +156,11 @@ export const DashboardTable = ({
         </Table.Body>
       </Table>
 
-      <PaginationPageMinimalCenter
-        page={1}
-        total={10}
+      {/* <PaginationPageMinimalCenter
+        page={page}
+        total={Math.ceil(total/per)}
         className="px-4 py-3 md:px-6 md:pt-3 md:pb-4"
-      />
+      /> */}
     </TableCard.Root>
   );
 };

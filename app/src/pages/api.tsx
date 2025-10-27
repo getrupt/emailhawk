@@ -9,8 +9,9 @@ import { DashboardUsage } from "@/components/custom/dashboard-usage";
 import axios from "axios";
 import Project from "@/models/Project";
 import { cx } from "@/utils/cx";
+import { APICode } from "@/components/custom/api-code";
 
-export const Dashboard = () => {
+export const API = () => {
   const cookies = new Cookies();
   const navigate = useNavigate();
   const [projects, setProjects] = useState<Project[]>([]);
@@ -34,7 +35,7 @@ export const Dashboard = () => {
   return (
     <div className={cx("flex flex-col bg-primary lg:flex-row relative overflow-hidden")}>
       <SidebarNavigationSimple
-        activeUrl="/dashboard"
+        activeUrl="/api"
         items={[
           {
             label: "Dashboard",
@@ -63,30 +64,28 @@ export const Dashboard = () => {
               <div className="flex flex-col gap-4 lg:flex-row lg:justify-between">
                 <div className="flex flex-col gap-0.5 lg:gap-1">
                   <h1 className="text-xl font-semibold text-primary lg:text-display-xs">
-                    Dashboard
+                    API
                   </h1>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col gap-6 px-4 lg:flex-row lg:gap-8 lg:px-8 relative">
+          <div className="flex flex-col gap-6 px-4 lg:flex-row lg:gap-8 lg:px-8 relative min-w-[calc(100%-120px)]">
             {projects[0] && (
               <DashboardUsage projectId={projects[0]._id} mutate={mutateCount} />
             )}
           </div>
 
           <div className="flex flex-col gap-6 px-4 lg:flex-row lg:gap-8 lg:px-8 relative">
-            {projects[0] && (
-              <DashboardTester projectId={projects[0]._id} onSuccess={() => setMutateCount(mutateCount + 1)} />
-            )}
+            <APICode />
           </div>
 
-          <div className="flex flex-col gap-6 px-4 lg:flex-row lg:gap-8 lg:px-8 relative">
+          {/* <div className="flex flex-col gap-6 px-4 lg:flex-row lg:gap-8 lg:px-8 relative w-[calc(100%-120px)]">
             {projects[0] && (
               <DashboardTable projectId={projects[0]._id} mutate={mutateCount} />
             )}
-          </div>
+          </div> */}
         </div>
       </main>
     </div>

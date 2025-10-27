@@ -45,8 +45,8 @@ export const DashboardUsage = ({ projectId, mutate }: { projectId: Project["_id"
         <div className="flex flex-1 flex-col gap-0.5">
           <ProgressBar
             labelPosition="right"
-            value={(verifyUsage?.count ?? 0) / 500 * 100}
-            valueFormatter={(value) => `${verifyUsage?.count ?? 0}/500 (${value.toFixed(1)}%)`}
+            value={(verifyUsage?.count ?? 0) / 100 * 100}
+            valueFormatter={(value) => `${verifyUsage?.count ?? 0}/100 (${value.toFixed(1)}%)`}
           />
         </div>
         <div className="flex gap-3">
