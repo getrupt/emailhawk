@@ -5,6 +5,7 @@ import adminRouter from "./routes/admin";
 import authRouter from "./routes/auth";
 import verifyRouter from "./routes/verify";
 import projectRouter from "./routes/projects";
+import webhookRoutes from "./routes/webhook";
 import passport from "passport";
 import { passportBearerStrategy, passportApiKeyStrategy } from "./controllers/PassportController";
 import cors from "cors";
@@ -33,10 +34,19 @@ app.use(cors({ origin: true, credentials: true }));
 passport.use("bearer", passportBearerStrategy);
 passport.use("api_key", passportApiKeyStrategy);
 
+app.use((req, res, next) => {
+  if (req.originalUrl === "/webhook/stripe") {
+    next();
+  } else {
+    json()(req, res, next);
+  }
+});
+
 app.use("/admin", adminRouter);
 app.use("/auth", authRouter);
 app.use("/verify", verifyRouter);
 app.use("/projects", projectRouter);
+app.use("/webhook", webhookRoutes);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);

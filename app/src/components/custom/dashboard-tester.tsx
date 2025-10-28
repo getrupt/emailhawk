@@ -10,17 +10,24 @@ import Project from "@/models/Project";
 import { useEffect, useState } from "react";
 import ApiKey from "@/models/ApiKey";
 
-export const DashboardTester = ({ projectId, onSuccess }: { projectId: Project["_id"], onSuccess?: () => void }) => {
+export const DashboardTester = ({
+  projectId,
+  onSuccess,
+}: {
+  projectId: Project["_id"];
+  onSuccess?: () => void;
+}) => {
   const [apiKeys, setApiKeys] = useState<ApiKey[]>([]);
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    axios.get(`/projects/${projectId}/apiKey`)
-    .then((response) => {
-      setApiKeys(response.data as ApiKey[]);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+    axios
+      .get(`/projects/${projectId}/apiKey`)
+      .then((response) => {
+        setApiKeys(response.data as ApiKey[]);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
   }, [projectId]);
 
   return (
@@ -37,19 +44,26 @@ export const DashboardTester = ({ projectId, onSuccess }: { projectId: Project["
         onSubmit={async (e) => {
           e.preventDefault();
           const data = Object.fromEntries(new FormData(e.currentTarget));
-          console.log("Form data:", data);
+          console.log("Form data:", data);  
           try {
-            const response = await axios.post(`/verify`, {
-              email: data.email,
-            }, {
-              headers: {
-                Authorization: `Bearer ${apiKeys[0].key}`,
+            setIsLoading(true);
+            const response = await axios.post(
+              `/verify`,
+              {
+                email: data.email,
               },
-            });
+              {
+                headers: {
+                  Authorization: `Bearer ${apiKeys[0].key}`,
+                },
+              }
+            );
             console.log("Response:", response.data);
             onSuccess?.();
           } catch (err) {
             console.error(err);
+          } finally {
+            setIsLoading(false);
           }
         }}
         className="z-10 flex flex-row gap-6 items-center flex-1"
@@ -65,8 +79,17 @@ export const DashboardTester = ({ projectId, onSuccess }: { projectId: Project["
           />
         </div>
         <div className="flex gap-3">
-          <Button type="submit" size="md">Verify</Button>
-          <Button color="secondary" size="md" href="/api">Use API</Button>
+          <Button
+            type="submit"
+            size="md"
+            showTextWhileLoading
+            isLoading={isLoading}
+          >
+            Verify
+          </Button>
+          <Button color="secondary" size="md" href="/api">
+            Use API
+          </Button>
         </div>
       </Form>
     </div>

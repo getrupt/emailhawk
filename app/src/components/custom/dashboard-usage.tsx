@@ -11,18 +11,36 @@ import Project from "@/models/Project";
 import { useEffect, useState } from "react";
 import VerifyUsage from "@/models/VerifyUsage";
 
-export const DashboardUsage = ({ projectId, mutate }: { projectId: Project["_id"], mutate?: number }) => {
+export const DashboardUsage = ({
+  projectId,
+  mutate,
+}: {
+  projectId: Project["_id"];
+  mutate?: number;
+}) => {
   const [verifyUsage, setVerifyUsage] = useState<VerifyUsage | undefined>();
 
   useEffect(() => {
-    axios.get(`/projects/${projectId}/verifyUsage`)
-    .then((response) => {
-      setVerifyUsage(response.data);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+    axios
+      .get(`/projects/${projectId}/verifyUsage`)
+      .then((response) => {
+        setVerifyUsage(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, [projectId, mutate]);
+
+  const [manageBillingLoading, setManageBillingLoading] = useState(false);
+  async function manageBilling() {
+    try {
+      setManageBillingLoading(true);
+      const { data } = await axios.get(`/projects/${projectId}/billing/manage`);
+      window.location.href = data.url;
+    } catch (error) {
+      setManageBillingLoading(false);
+    }
+  }
 
   return (
     <div className="relative flex flex-col gap-4 border rounded-xl border-secondary px-4 py-5 md:flex-row md:px-6 items-center w-full">
@@ -45,12 +63,20 @@ export const DashboardUsage = ({ projectId, mutate }: { projectId: Project["_id"
         <div className="flex flex-1 flex-col gap-0.5">
           <ProgressBar
             labelPosition="right"
-            value={(verifyUsage?.count ?? 0) / 100 * 100}
-            valueFormatter={(value) => `${verifyUsage?.count ?? 0}/100 (${value.toFixed(1)}%)`}
+            value={((verifyUsage?.count ?? 0) / 100) * 100}
+            valueFormatter={(value) =>
+              `${verifyUsage?.count ?? 0}/100 (${value.toFixed(1)}%)`
+            }
           />
         </div>
         <div className="flex gap-3">
-          <Button type="submit" size="md">
+          <Button
+            type="submit"
+            size="md"
+            onClick={manageBilling}
+            isLoading={manageBillingLoading}
+            showTextWhileLoading
+          >
             Add API Usage
           </Button>
         </div>
