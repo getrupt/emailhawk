@@ -1,4 +1,6 @@
 import React from "react";
+import { config } from "../config";
+import { EmailHawkLogo } from "./logo/emailhawk-logo";
 
 export function Hero() {
   return (
@@ -13,27 +15,7 @@ export function Hero() {
         <div className="text-center">
           {/* Logo/Brand */}
           <div className="flex justify-center mb-8">
-            <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-2xl shadow-xl">
-              <svg
-                className="w-16 h-16 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4"
-                />
-              </svg>
-            </div>
+            <EmailHawkLogo className="h-20" />
           </div>
 
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
@@ -50,7 +32,7 @@ export function Hero() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href="#pricing"
+              href={config.getRegisterUrl()}
               className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
             >
               Get Started Free

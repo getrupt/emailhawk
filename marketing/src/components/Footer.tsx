@@ -1,4 +1,5 @@
 import React from "react";
+import { EmailHawkLogo } from "./logo/emailhawk-logo";
 
 export function Footer() {
   return (
@@ -7,23 +8,8 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-2 rounded-lg">
-                <svg
-                  className="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-              <span className="text-xl font-bold text-white">EmailHawk</span>
+            <div className="mb-4">
+              <EmailHawkLogo className="h-8" />
             </div>
             <p className="text-gray-400 text-sm">
               The fastest and most reliable email verification API for developers.

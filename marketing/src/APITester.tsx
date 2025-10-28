@@ -16,18 +16,17 @@ export function APITester() {
 
       // Mock response
       const mockResponse = {
-        email: email,
-        valid: email.includes("@") && email.includes("."),
-        score: Math.floor(Math.random() * 30) + 70,
-        disposable: email.includes("temp") || email.includes("fake"),
-        domain: email.split("@")[1] || "",
-        syntax: {
-          valid: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
-        },
-        dns: {
-          mx_records: true,
-        },
-        timestamp: new Date().toISOString(),
+        "status": "valid",
+        "regexp": true,
+        "gibberish": false,
+        "disposable": false,
+        "webmail": false,
+        "mx_records": true,
+        "smtp_server": true,
+        "smtp_check": true,
+        "accept_all": false,
+        "block": false,
+        "domain": email.split("@")[1] || ""
       };
 
       setResponse(JSON.stringify(mockResponse, null, 2));

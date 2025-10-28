@@ -24,11 +24,34 @@ A modern, responsive marketing website for EmailHawk - the email verification AP
 
 - [Bun](https://bun.sh) installed on your machine
 
+### Environment Variables
+
+Create a `.env` file in the marketing directory:
+
+```bash
+# The URL of the EmailHawk application (without trailing slash)
+VITE_APP_URL=http://localhost:3000
+
+# For production:
+# VITE_APP_URL=https://app.emailhawk.com
+```
+
+The `VITE_APP_URL` variable is used for:
+- "Get Started Free" buttons → `${VITE_APP_URL}/register`
+- Pricing CTAs → `${VITE_APP_URL}/register`
+- Other app links
+
 ### Installation
 
 ```bash
 # Install dependencies
 bun install
+
+# Create environment file
+cp .env.example .env
+
+# Edit .env with your app URL
+nano .env
 
 # Run development server
 bun dev
@@ -42,7 +65,7 @@ bun start
 
 ## Development
 
-The site will be available at `http://localhost:3000` (or the port specified in your configuration).
+The site will be available at `http://localhost:3006` (default port).
 
 Hot Module Replacement (HMR) is enabled, so changes will be reflected immediately.
 
@@ -74,6 +97,23 @@ The site uses a dark theme with blue and purple accents. You can customize the c
 - Modify feature list in `components/Features.tsx`
 - Adjust pricing tiers in `components/Pricing.tsx`
 - Change footer links in `components/Footer.tsx`
+
+### Configuration
+
+The app URL is managed through the `src/config.ts` file, which reads from the `VITE_APP_URL` environment variable:
+
+```typescript
+import { config } from './config';
+
+// Get registration URL
+const registerUrl = config.getRegisterUrl(); // {VITE_APP_URL}/register
+
+// Get login URL
+const loginUrl = config.getLoginUrl(); // {VITE_APP_URL}/login
+
+// Get dashboard URL  
+const dashboardUrl = config.getDashboardUrl(); // {VITE_APP_URL}/dashboard
+```
 
 ### API Integration
 

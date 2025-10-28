@@ -1,4 +1,5 @@
 import React from "react";
+import { config } from "../config";
 
 export function Pricing() {
   const plans = [
@@ -110,15 +111,16 @@ export function Pricing() {
                   </li>
                 ))}
               </ul>
-              <button
-                className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-200 ${
+              <a
+                href={plan.name === "Enterprise" ? "#contact" : config.getRegisterUrl()}
+                className={`block w-full py-3 px-6 rounded-lg font-semibold transition-all duration-200 text-center ${
                   plan.highlighted
                     ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-xl"
                     : "bg-white/10 text-white border border-white/20 hover:bg-white/20"
                 }`}
               >
                 {plan.cta}
-              </button>
+              </a>
             </div>
           ))}
         </div>

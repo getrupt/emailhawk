@@ -31,7 +31,8 @@ export function HowItWorks() {
               </p>
               <div className="w-full bg-[#1a1a1a] rounded-lg p-4 border border-white/10 text-left">
                 <code className="text-sm text-blue-300">
-                  <div className="text-gray-500">POST /api/verify</div>
+                  <div className="text-gray-500">POST https://api.emailhawk.com/verify</div>
+                  <div className="text-gray-500">Authorization: Bearer YOUR_API_KEY</div>
                   <div className="mt-2">{"{"}</div>
                   <div className="ml-4">
                     "email": "user@example.com"
@@ -117,14 +118,21 @@ export function HowItWorks() {
                 Get Results
               </h3>
               <p className="text-gray-300 mb-6">
-                Receive detailed verification results instantly
+                Receive detailed verification results instantly <br /><br />
               </p>
               <div className="w-full bg-[#1a1a1a] rounded-lg p-4 border border-white/10 text-left">
                 <code className="text-sm text-green-300">
                   <div>{"{"}</div>
-                  <div className="ml-4">"valid": true,</div>
-                  <div className="ml-4">"score": 95,</div>
+                  <div className="ml-4">"status": "valid",</div>
+                  <div className="ml-4">"regexp": true,</div>
+                  <div className="ml-4">"gibberish": false,</div>
                   <div className="ml-4">"disposable": false,</div>
+                  <div className="ml-4">"webmail": false,</div>
+                  <div className="ml-4">"mx_records": true,</div>
+                  <div className="ml-4">"smtp_server": true,</div>
+                  <div className="ml-4">"smtp_check": true,</div>
+                  <div className="ml-4">"accept_all": false,</div>
+                  <div className="ml-4">"block": false,</div>
                   <div className="ml-4">"domain": "example.com"</div>
                   <div>{"}"}</div>
                 </code>
