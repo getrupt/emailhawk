@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    @apply text-[rgba(255,255,255,0.87)] bg-[#0f0f1e] font-sans;
+  }
+
+  body {
+    @apply min-w-[320px] min-h-screen relative m-0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.delay-1000 {
+  animation-delay: 1s;
+}
+
+@media (prefers-reduced-motion) {
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
