@@ -2,43 +2,30 @@
 
 @layer base {
   :root {
-    @apply text-[rgba(255,255,255,0.87)] bg-[#242424] font-sans;
+    @apply text-[rgba(255,255,255,0.87)] bg-[#0f0f1e] font-sans;
   }
 
   body {
-    @apply grid place-items-center min-w-[320px] min-h-screen relative m-0;
+    @apply min-w-[320px] min-h-screen relative m-0;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  opacity: 0.05;
-  background: url("./logo.svg");
-  background-size: 256px;
-  transform: rotate(-12deg) scale(1.35);
-  animation: slide 30s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes slide {
-  from {
-    background-position: 0 0;
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.1;
   }
-  to {
-    background-position: 256px 224px;
+  50% {
+    opacity: 0.2;
   }
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.delay-1000 {
+  animation-delay: 1s;
 }
 
 @media (prefers-reduced-motion) {
@@ -46,5 +33,8 @@ body::before {
   ::before,
   ::after {
     animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }

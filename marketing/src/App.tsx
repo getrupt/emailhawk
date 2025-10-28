@@ -1,34 +1,30 @@
 import "./index.css";
 import { APITester } from "./APITester";
-
-import logo from "./logo.svg";
-import reactLogo from "./react.svg";
+import { Hero } from "./components/Hero";
+import { Features } from "./components/Features";
+import { HowItWorks } from "./components/HowItWorks";
+import { Pricing } from "./components/Pricing";
+import { Footer } from "./components/Footer";
 
 export function App() {
   return (
-    <div className="max-w-7xl mx-auto p-8 text-center relative z-10">
-      <div className="flex justify-center items-center gap-8 mb-8">
-        <img
-          src={logo}
-          alt="Bun Logo"
-          className="h-24 p-6 transition-all duration-300 hover:drop-shadow-[0_0_2em_#646cffaa] scale-120"
-        />
-        <img
-          src={reactLogo}
-          alt="React Logo"
-          className="h-24 p-6 transition-all duration-300 hover:drop-shadow-[0_0_2em_#61dafbaa] animate-[spin_20s_linear_infinite]"
-        />
+    <div className="min-h-screen">
+      <Hero />
+      <Features />
+      <HowItWorks />
+      <div className="bg-gradient-to-b from-[#1a1a2e] to-[#16213e] py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-center mb-4 text-white">
+            Try it Now
+          </h2>
+          <p className="text-center text-gray-300 mb-8 max-w-2xl mx-auto">
+            Test our email verification API right here. No signup required.
+          </p>
+          <APITester />
+        </div>
       </div>
-
-      <h1 className="text-5xl font-bold my-4 leading-tight">Bun + React</h1>
-      <p>
-        Edit{" "}
-        <code className="bg-[#1a1a1a] px-2 py-1 rounded font-mono">
-          src/App.tsx
-        </code>{" "}
-        and save to test HMR
-      </p>
-      <APITester />
+      <Pricing />
+      <Footer />
     </div>
   );
 }

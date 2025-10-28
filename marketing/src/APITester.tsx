@@ -1,63 +1,154 @@
-import React, { useRef, type FormEvent } from "react";
+import React, { useState, type FormEvent } from "react";
 
 export function APITester() {
-  const responseInputRef = useRef<HTMLTextAreaElement>(null);
+  const [email, setEmail] = useState("");
+  const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const testEndpoint = async (e: FormEvent<HTMLFormElement>) => {
+  const testEmail = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
+    setResponse("");
 
     try {
-      const form = e.currentTarget;
-      const formData = new FormData(form);
-      const endpoint = formData.get("endpoint") as string;
-      const url = new URL(endpoint, location.href);
-      const method = formData.get("method") as string;
-      const res = await fetch(url, { method });
+      // Simulate API call - in production, this would call your actual API
+      await new Promise((resolve) => setTimeout(resolve, 800));
 
-      const data = await res.json();
-      responseInputRef.current!.value = JSON.stringify(data, null, 2);
+      // Mock response
+      const mockResponse = {
+        email: email,
+        valid: email.includes("@") && email.includes("."),
+        score: Math.floor(Math.random() * 30) + 70,
+        disposable: email.includes("temp") || email.includes("fake"),
+        domain: email.split("@")[1] || "",
+        syntax: {
+          valid: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
+        },
+        dns: {
+          mx_records: true,
+        },
+        timestamp: new Date().toISOString(),
+      };
+
+      setResponse(JSON.stringify(mockResponse, null, 2));
     } catch (error) {
-      responseInputRef.current!.value = String(error);
+      setResponse(`Error: ${String(error)}`);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="mt-8 mx-auto w-full max-w-2xl text-left flex flex-col gap-4">
-      <form
-        onSubmit={testEndpoint}
-        className="flex items-center gap-2 bg-[#1a1a1a] p-3 rounded-xl font-mono border-2 border-[#fbf0df] transition-colors duration-300 focus-within:border-[#f3d5a3] w-full"
-      >
-        <select
-          name="method"
-          className="bg-[#fbf0df] text-[#1a1a1a] py-1.5 px-3 rounded-lg font-bold text-sm min-w-[0px] appearance-none cursor-pointer hover:bg-[#f3d5a3] transition-colors duration-100"
-        >
-          <option value="GET" className="py-1">
-            GET
-          </option>
-          <option value="PUT" className="py-1">
-            PUT
-          </option>
-        </select>
-        <input
-          type="text"
-          name="endpoint"
-          defaultValue="/api/hello"
-          className="w-full flex-1 bg-transparent border-0 text-[#fbf0df] font-mono text-base py-1.5 px-2 outline-none focus:text-white placeholder-[#fbf0df]/40"
-          placeholder="/api/hello"
-        />
-        <button
-          type="submit"
-          className="bg-[#fbf0df] text-[#1a1a1a] border-0 px-5 py-1.5 rounded-lg font-bold transition-all duration-100 hover:bg-[#f3d5a3] hover:-translate-y-px cursor-pointer whitespace-nowrap"
-        >
-          Send
-        </button>
+    <div id="demo" className="mx-auto w-full max-w-4xl text-left flex flex-col gap-6">
+      <form onSubmit={testEmail} className="flex flex-col gap-4">
+        <div className="flex flex-col sm:flex-row items-stretch gap-3">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter email address to verify..."
+            className="flex-1 bg-white/5 backdrop-blur-sm border-2 border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-400 outline-none focus:border-blue-500 transition-colors"
+            required
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold px-8 py-3 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 disabled:opacity-50 disabled:transform-none disabled:cursor-not-allowed whitespace-nowrap"
+          >
+            {loading ? (
+              <span className="flex items-center gap-2">
+                <svg
+                  className="animate-spin h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  />
+                </svg>
+                Verifying...
+              </span>
+            ) : (
+              "Verify Email"
+            )}
+          </button>
+        </div>
       </form>
-      <textarea
-        ref={responseInputRef}
-        readOnly
-        placeholder="Response will appear here..."
-        className="w-full min-h-[140px] bg-[#1a1a1a] border-2 border-[#fbf0df] rounded-xl p-3 text-[#fbf0df] font-mono resize-y focus:border-[#f3d5a3] placeholder-[#fbf0df]/40"
-      />
+
+      {response && (
+        <div className="bg-[#1a1a1a] rounded-lg border border-white/10 overflow-hidden">
+          <div className="bg-white/5 px-4 py-2 border-b border-white/10 flex items-center justify-between">
+            <span className="text-gray-300 text-sm font-semibold">Response</span>
+            <button
+              onClick={() => navigator.clipboard.writeText(response)}
+              className="text-blue-400 hover:text-blue-300 text-sm flex items-center gap-1"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                />
+              </svg>
+              Copy
+            </button>
+          </div>
+          <pre className="p-4 text-sm text-green-300 overflow-x-auto">
+            {response}
+          </pre>
+        </div>
+      )}
+
+      <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10">
+        <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+          <svg
+            className="w-5 h-5 text-blue-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          Try These Examples
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {[
+            "user@gmail.com",
+            "test@fake-email.com",
+            "invalid-email",
+            "contact@company.io",
+          ].map((example) => (
+            <button
+              key={example}
+              onClick={() => setEmail(example)}
+              className="text-left text-sm text-gray-300 bg-white/5 hover:bg-white/10 px-3 py-2 rounded border border-white/10 hover:border-blue-500/50 transition-colors"
+            >
+              {example}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
