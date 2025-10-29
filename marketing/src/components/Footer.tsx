@@ -1,7 +1,16 @@
 import React from "react";
 import { EmailHawkLogo } from "./logo/emailhawk-logo";
+import { useRouter } from "../App";
+import RuptLogo from "../assets/rupt-logo.svg";
 
 export function Footer() {
+  const { navigate } = useRouter();
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, page: string) => {
+    e.preventDefault();
+    navigate(page);
+  };
+
   return (
     <footer className="bg-[#0f0f1e] border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -9,11 +18,30 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-1">
             <div className="mb-4">
-              <EmailHawkLogo className="h-8" />
+              <a
+                href="#"
+                onClick={(e) => handleLinkClick(e, "")}
+                className="inline-block"
+              >
+                <EmailHawkLogo className="h-8" />
+              </a>
             </div>
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-sm mb-4">
               The fastest and most reliable email verification API for developers.
             </p>
+            <div className="flex items-center gap-2 text-sm text-gray-400">
+              <span>Made with</span>
+              <span className="text-red-500">♥</span>
+              <span>by</span>
+              <a
+                href="https://rupt.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block hover:opacity-80 transition-opacity"
+              >
+                <img src={RuptLogo} alt="Rupt" className="h-4 w-auto" />
+              </a>
+            </div>
           </div>
 
           {/* Product */}
@@ -23,6 +51,7 @@ export function Footer() {
               <li>
                 <a
                   href="#features"
+                  onClick={(e) => handleLinkClick(e, "features")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Features
@@ -31,6 +60,7 @@ export function Footer() {
               <li>
                 <a
                   href="#pricing"
+                  onClick={(e) => handleLinkClick(e, "pricing")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Pricing
@@ -39,6 +69,7 @@ export function Footer() {
               <li>
                 <a
                   href="#demo"
+                  onClick={(e) => handleLinkClick(e, "")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   API Demo
@@ -47,6 +78,7 @@ export function Footer() {
               <li>
                 <a
                   href="#docs"
+                  onClick={(e) => handleLinkClick(e, "")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Documentation
@@ -62,6 +94,7 @@ export function Footer() {
               <li>
                 <a
                   href="#about"
+                  onClick={(e) => handleLinkClick(e, "about")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   About Us
@@ -70,6 +103,7 @@ export function Footer() {
               <li>
                 <a
                   href="#blog"
+                  onClick={(e) => handleLinkClick(e, "blog")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Blog
@@ -78,6 +112,7 @@ export function Footer() {
               <li>
                 <a
                   href="#contact"
+                  onClick={(e) => handleLinkClick(e, "contact")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Contact
@@ -86,6 +121,7 @@ export function Footer() {
               <li>
                 <a
                   href="#careers"
+                  onClick={(e) => handleLinkClick(e, "careers")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Careers
@@ -101,6 +137,7 @@ export function Footer() {
               <li>
                 <a
                   href="#privacy"
+                  onClick={(e) => handleLinkClick(e, "privacy")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Privacy Policy
@@ -109,6 +146,7 @@ export function Footer() {
               <li>
                 <a
                   href="#terms"
+                  onClick={(e) => handleLinkClick(e, "terms")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Terms of Service
@@ -117,6 +155,7 @@ export function Footer() {
               <li>
                 <a
                   href="#security"
+                  onClick={(e) => handleLinkClick(e, "security")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Security
@@ -125,6 +164,7 @@ export function Footer() {
               <li>
                 <a
                   href="#compliance"
+                  onClick={(e) => handleLinkClick(e, "compliance")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Compliance
@@ -136,7 +176,7 @@ export function Footer() {
 
         <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2025 EmailHawk. All rights reserved.
+            © 2025 Sabil Inc. All rights reserved.
           </p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <a

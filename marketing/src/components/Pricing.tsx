@@ -22,7 +22,8 @@ export function Pricing() {
       price: "29",
       description: "For growing businesses",
       features: [
-        "10,000 verifications/month",
+        "1,000 verifications/month",
+        "$0.01 per additional verification",
         "All Free features",
         "Disposable email detection",
         "Priority support",
@@ -30,21 +31,6 @@ export function Pricing() {
         "Bulk verification",
       ],
       cta: "Start Free Trial",
-      highlighted: true,
-    },
-    {
-      name: "Enterprise",
-      price: "Custom",
-      description: "For large-scale operations",
-      features: [
-        "Unlimited verifications",
-        "All Pro features",
-        "Dedicated support",
-        "Custom SLA",
-        "On-premise deployment",
-        "Custom integrations",
-      ],
-      cta: "Contact Sales",
       highlighted: false,
     },
   ];
@@ -61,7 +47,7 @@ export function Pricing() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {plans.map((plan, index) => (
             <div
               key={index}
@@ -112,7 +98,7 @@ export function Pricing() {
                 ))}
               </ul>
               <a
-                href={plan.name === "Enterprise" ? "#contact" : config.getRegisterUrl()}
+                href={config.getRegisterUrl()}
                 className={`block w-full py-3 px-6 rounded-lg font-semibold transition-all duration-200 text-center ${
                   plan.highlighted
                     ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-xl"
