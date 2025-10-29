@@ -57,6 +57,8 @@ export function App() {
     const updatePage = () => {
       const hash = window.location.hash.slice(1);
       setCurrentPage(hash || "home");
+      // Scroll to top when page changes
+      window.scrollTo({ top: 0, behavior: 'instant' });
     };
 
     updatePage();
