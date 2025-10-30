@@ -150,6 +150,7 @@ const result = await build({
   sourcemap: "linked",
   define: {
     "process.env.NODE_ENV": JSON.stringify("production"),
+    "process.env.VITE_APP_URL": JSON.stringify(process.env.VITE_APP_URL || "https://app.emailhawk.dev"),
   },
   ...cliConfig, // Merge in any CLI-provided options
 });
