@@ -28,7 +28,7 @@ export function Pricing() {
         <div className="bg-gradient-to-b from-blue-500/20 to-purple-600/20 border-2 border-blue-500 rounded-2xl p-12 backdrop-blur-sm">
           <div className="text-center mb-12">
             <div className="text-6xl font-bold text-white mb-4">
-              First 100 free
+              First 100 free each month
             </div>
             <div className="text-4xl font-bold text-gray-300">
               $0.01 per additional verification
