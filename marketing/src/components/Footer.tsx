@@ -78,7 +78,7 @@ export function Footer() {
               <li>
                 <a
                   href="#docs"
-                  onClick={(e) => handleLinkClick(e, "")}
+                  onClick={(e) => handleLinkClick(e, "docs")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Documentation

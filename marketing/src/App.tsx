@@ -17,6 +17,7 @@ import { PrivacyPolicyPage } from "./pages/PrivacyPolicy";
 import { TermsOfServicePage } from "./pages/TermsOfService";
 import { SecurityPage } from "./pages/Security";
 import { CompliancePage } from "./pages/Compliance";
+import { DocumentationPage } from "./pages/Documentation";
 
 // Router Context
 const RouterContext = createContext<{
@@ -31,7 +32,7 @@ function HomeContent() {
   return (
     <>
       <Hero />
-      <div className="bg-gradient-to-b from-[#1a1a2e] to-[#16213e] py-16">
+      <div id="demo" className="bg-gradient-to-b from-[#1a1a2e] to-[#16213e] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-center mb-4 text-white">
             Try it Now
@@ -93,6 +94,9 @@ export function App() {
         return <SecurityPage />;
       case "compliance":
         return <CompliancePage />;
+      case "docs":
+      case "documentation":
+        return <DocumentationPage />;
       default:
         return <HomeContent />;
     }
