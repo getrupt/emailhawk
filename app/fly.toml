@@ -9,8 +9,7 @@ primary_region = 'lax'
 [build]
   [build.args]
     # Configure your API URL here - update after deploying your API
-    API_URL = ""
-    # Example: API_URL = "https://your-api-domain.fly.dev"
+    API_URL = "https://api.emailhawk.dev"
 
 [http_service]
   internal_port = 8080
