@@ -8,7 +8,8 @@ import reactLogo from "./react.svg";
 
 const cookies = new Cookies();
 
-axios.defaults.baseURL = "http://localhost:8006";
+// Use import.meta.env for Bun/Vite compatibility, fallback to empty string if not set
+axios.defaults.baseURL = import.meta.env.API_URL || "";
 axios.defaults.withCredentials = true;
 const token = cookies.get("token");
 if (token) {
