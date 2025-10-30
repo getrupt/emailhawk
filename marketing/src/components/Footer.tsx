@@ -180,7 +180,7 @@ export function Footer() {
           </p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <a
-              href="https://github.com/getrupt"
+              href="https://github.com/getrupt/emailhawk"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors"
