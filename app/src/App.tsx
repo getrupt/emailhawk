@@ -8,7 +8,7 @@ import reactLogo from "./react.svg";
 
 const cookies = new Cookies();
 
-axios.defaults.baseURL = "http://localhost:8006";
+axios.defaults.baseURL = process.env.API_URL;
 axios.defaults.withCredentials = true;
 const token = cookies.get("token");
 if (token) {
