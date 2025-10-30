@@ -7,6 +7,10 @@ app = 'app-morning-sunset-9817'
 primary_region = 'lax'
 
 [build]
+  [build.args]
+    # Configure your API URL here - update after deploying your API
+    API_URL = ""
+    # Example: API_URL = "https://your-api-domain.fly.dev"
 
 [http_service]
   internal_port = 8080
