@@ -3,6 +3,14 @@ import { config } from "../config";
 import { EmailHawkLogo } from "./logo/emailhawk-logo";
 
 export function Hero() {
+  const scrollToDemo = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const demoSection = document.getElementById("demo");
+    if (demoSection) {
+      demoSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-[#0f3460] via-[#16213e] to-[#1a1a2e]">
       {/* Animated background elements */}
@@ -39,9 +47,10 @@ export function Hero() {
             </a>
             <a
               href="#demo"
+              onClick={scrollToDemo}
               className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg border-2 border-white/20 hover:bg-white/20 transition-all duration-200"
             >
-              View Documentation
+              Try it Now
             </a>
           </div>
 

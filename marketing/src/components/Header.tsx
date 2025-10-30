@@ -63,6 +63,13 @@ export function Header() {
               Contact
             </a>
             <a
+              href="#docs"
+              onClick={(e) => handleLinkClick(e, "docs")}
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              Docs
+            </a>
+            <a
               href="https://app.emailhawk.com/register"
               className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:shadow-xl transition-all duration-200"
             >
@@ -139,6 +146,13 @@ export function Header() {
                 className="text-gray-300 hover:text-white transition-colors"
               >
                 Contact
+              </a>
+              <a
+                href="#docs"
+                onClick={(e) => handleLinkClick(e, "docs")}
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                Docs
               </a>
               <a
                 href="https://app.emailhawk.com/register"
