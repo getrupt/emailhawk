@@ -70,7 +70,7 @@ export function Header() {
               Docs
             </a>
             <a
-              href="https://app.emailhawk.com/register"
+              href="https://app.emailhawk.dev/register"
               className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:shadow-xl transition-all duration-200"
             >
               Get Started
@@ -155,7 +155,7 @@ export function Header() {
                 Docs
               </a>
               <a
-                href="https://app.emailhawk.com/register"
+                href="https://app.emailhawk.dev/register"
                 className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-lg font-semibold text-center hover:shadow-xl transition-all duration-200"
               >
                 Get Started

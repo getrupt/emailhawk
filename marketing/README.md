@@ -33,7 +33,7 @@ Create a `.env` file in the marketing directory:
 VITE_APP_URL=http://localhost:3000
 
 # For production:
-# VITE_APP_URL=https://app.emailhawk.com
+# VITE_APP_URL=https://app.emailhawk.dev
 ```
 
 The `VITE_APP_URL` variable is used for:
