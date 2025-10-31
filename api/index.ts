@@ -42,6 +42,10 @@ app.use((req, res, next) => {
   }
 });
 
+app.get("/health", (req, res) => {
+  res.status(200).json({ healthy: true, environment: process.env.ENV });
+});
+
 app.use("/admin", adminRouter);
 app.use("/auth", authRouter);
 app.use("/verify", verifyRouter);

@@ -6,13 +6,15 @@ import { useSearchParams } from "react-router";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 export const LoginSimple = () => {
   const [searchParams] = useSearchParams();
   const queryAction = searchParams.get("action");
   const cookies = new Cookies();
   const navigate = useNavigate();
-
+  const [loginLoading, setLoginLoading] = useState(false);
+  
   if (queryAction === "logout") {
     cookies.remove("token", { path: "/", domain: "" });
   }
@@ -47,6 +49,7 @@ export const LoginSimple = () => {
         <Form
           onSubmit={async (e) => {
             e.preventDefault();
+            setLoginLoading(true);
             const data = Object.fromEntries(new FormData(e.currentTarget));
             console.log("Form data:", data);
             try {
@@ -55,6 +58,8 @@ export const LoginSimple = () => {
               navigate("/dashboard");
             } catch (err) {
               console.error(err);
+            } finally {
+              setLoginLoading(false);
             }
           }}
           className="z-10 flex flex-col gap-6"
@@ -89,7 +94,7 @@ export const LoginSimple = () => {
           </div> */}
 
           <div className="flex flex-col gap-4">
-            <Button type="submit" size="lg">
+            <Button type="submit" size="lg" isLoading={loginLoading} showTextWhileLoading>
               Sign in
             </Button>
           </div>

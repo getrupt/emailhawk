@@ -19,6 +19,14 @@ const emailDomainSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    smtp_server: {
+      type: Boolean,
+      default: false,
+    },
+    smtp_check: {
+      type: Boolean,
+      default: false,
+    },
     syncedAt: {
       type: Date,
       default: null,
