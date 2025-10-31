@@ -19,8 +19,9 @@ router.post(
     }
 
     try {
-      event = stripe.webhooks.constructEvent(payload, sig, process.env.STRIPE_WEBHOOK_SECRET!);
+      event = await stripe.webhooks.constructEventAsync(payload, sig, process.env.STRIPE_WEBHOOK_SECRET!);
     } catch (err) {
+      console.error("Error processing stripe webhook", err);
       res.status(400).send(`Webhook Error: ${err}`);
       return;
     }
