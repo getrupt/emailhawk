@@ -4,6 +4,12 @@ import type IEmailDomain from "../models/EmailDomain";
 import { EmailDomain } from "../db/mongo/schemas/EmailDomain";
 import dayjs from "dayjs";
 import type { Answer } from "@leichtgewicht/dns-packet";
+import * as dns from "dns";
+import { promisify } from "util";
+
+const resolveMX = promisify(dns.resolveMx);
+const resolve4 = promisify(dns.resolve4);
+const resolve6 = promisify(dns.resolve6);
 
 const validateEmailDomainDefaultResponse = {
   status: "unknown",
@@ -78,6 +84,7 @@ export interface EmailDomainDNSRecords {
   answers: Answer[] | undefined;
   rcode: string | undefined;
 }
+
 export async function getEmailDomainDNSRecords({
   domain,
 }: {
@@ -158,6 +165,18 @@ export function validateEmailFormat(email: string) {
   return emailRegex({ exact: true }).test(email);
 }
 
+async function verifyMailServerIPs(mailServer: string): Promise<boolean> {
+  try {
+    const ipv4Addresses = await resolve4(mailServer).catch(() => []);
+
+    const ipv6Addresses = await resolve6(mailServer).catch(() => []);
+
+    return ipv4Addresses.length > 0 || ipv6Addresses.length > 0;
+  } catch (error) {
+    return false;
+  }
+}
+
 export async function verifyEmailDomain({
   email,
   timeout = 4000,
@@ -180,7 +199,7 @@ export async function verifyEmailDomain({
     return {
       ...validateEmailDomainDefaultResponse,
       status: "invalid",
-    }
+    };
   }
 
   const domain = email.split("@")[1];
@@ -189,7 +208,7 @@ export async function verifyEmailDomain({
     return {
       ...validateEmailDomainDefaultResponse,
       status: "invalid",
-    }
+    };
   }
 
   let emailDomain = await EmailDomain.findOne({ domain });
@@ -205,9 +224,28 @@ export async function verifyEmailDomain({
         new Promise<boolean>(async (resolve) => {
           const res = await getEmailDomainDNSRecords({ domain });
           if (res?.rcode === "NOERROR") {
+            const mxRecords = await resolveMX(domain);
+
+            const hasSMTPRecords = !(!mxRecords || mxRecords.length === 0);
+            let hasValidMailServer = false;
+
+            if (hasSMTPRecords) {
+              const sortedMXRecords = mxRecords.sort(
+                (a, b) => a.priority - b.priority
+              );
+              if (sortedMXRecords[0]) {
+                const primaryMX = sortedMXRecords[0].exchange;
+                hasValidMailServer = await verifyMailServerIPs(primaryMX);
+              }
+            }
+
             emailDomain = await updateEmailDomain({
               domain,
-              data: { mx_records: true },
+              data: {
+                mx_records: true,
+                smtp_server: hasSMTPRecords,
+                smtp_check: hasValidMailServer,
+              },
             });
           } else {
             console.error(
@@ -219,7 +257,9 @@ export async function verifyEmailDomain({
           }
           resolve(true);
         }),
-        new Promise<boolean>((resolve) => setTimeout(() => resolve(false), timeout)),
+        new Promise<boolean>((resolve) =>
+          setTimeout(() => resolve(false), timeout)
+        ),
       ]);
       if (!res) {
         console.error("DNS lookup timed out", domain);
@@ -227,7 +267,7 @@ export async function verifyEmailDomain({
     } catch (error) {
       emailDomain = await updateEmailDomain({
         domain,
-        data: { mx_records: false },
+        data: { mx_records: false, smtp_server: false, smtp_check: false },
         noSync: true,
       });
     }
@@ -242,7 +282,11 @@ export async function verifyEmailDomain({
     status = "disposable";
   } else if (emailDomain.webmail) {
     status = "webmail";
-  } else if (!emailDomain.mx_records) {
+  } else if (
+    !emailDomain.mx_records ||
+    !emailDomain.smtp_server ||
+    !emailDomain.smtp_check
+  ) {
     status = "invalid";
   }
 
@@ -254,7 +298,7 @@ export async function verifyEmailDomain({
     disposable: emailDomain.disposable,
     webmail: emailDomain.webmail,
     mx_records: emailDomain.mx_records,
-    smtp_server: emailDomain.mx_records,
-    smtp_check: emailDomain.mx_records,
+    smtp_server: emailDomain.smtp_server,
+    smtp_check: emailDomain.smtp_check,
   };
 }

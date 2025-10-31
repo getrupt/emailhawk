@@ -19,6 +19,7 @@ export const DashboardUsage = ({
   mutate?: number;
 }) => {
   const [verifyUsage, setVerifyUsage] = useState<VerifyUsage | undefined>();
+  const [subscription, setSubscription] = useState<any | undefined>();
 
   useEffect(() => {
     axios
@@ -29,6 +30,12 @@ export const DashboardUsage = ({
       .catch((err) => {
         console.error(err);
       });
+
+    axios.get(`/projects/${projectId}/billing/subscription`).then((response) => {
+      setSubscription(response.data);
+    }).catch((err) => {
+      console.error(err);
+    });
   }, [projectId, mutate]);
 
   const [manageBillingLoading, setManageBillingLoading] = useState(false);
@@ -77,7 +84,7 @@ export const DashboardUsage = ({
             isLoading={manageBillingLoading}
             showTextWhileLoading
           >
-            Add API Usage
+            {subscription?.status === "active" ? "Manage Subscription" : "Add Payment Method"}
           </Button>
         </div>
       </Form>

@@ -10,6 +10,7 @@ const cookies = new Cookies();
 
 export const RegisterSimple = () => {
   const [password, setPassword] = useState("");
+  const [registerLoading, setRegisterLoading] = useState(false);
   const navigate = useNavigate();
 
   return (
@@ -42,6 +43,7 @@ export const RegisterSimple = () => {
         <Form
           onSubmit={async (e) => {
             e.preventDefault();
+            setRegisterLoading(true);
             const data = Object.fromEntries(new FormData(e.currentTarget));
             console.log("Form data:", data);
             try {
@@ -51,6 +53,8 @@ export const RegisterSimple = () => {
               navigate("/dashboard");
             } catch (err) {
               console.error(err);
+            } finally {
+              setRegisterLoading(false);
             }
           }}
           className="z-10 flex flex-col gap-6"
@@ -97,7 +101,7 @@ export const RegisterSimple = () => {
           </div>
 
           <div className="z-10 flex flex-col gap-4">
-            <Button type="submit" size="lg">
+            <Button type="submit" size="lg" isLoading={registerLoading} showTextWhileLoading>
               Get started
             </Button>
           </div>
