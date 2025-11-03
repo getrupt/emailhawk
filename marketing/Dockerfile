@@ -15,6 +15,12 @@ RUN bun install --frozen-lockfile
 # Copy source files
 COPY . .
 
+# Accept build argument for API URL
+ARG API_URL=""
+ENV API_URL=$API_URL
+ARG API_KEY=""
+ENV API_KEY=$API_KEY
+
 # Build the application
 RUN bun run build.ts --minify --source-map=linked
 
