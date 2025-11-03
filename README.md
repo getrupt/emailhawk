@@ -149,13 +149,13 @@ STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 **app/.env**
 
 ```env
-VITE_API_URL=http://localhost:8006
+API_URL=http://localhost:8006
 ```
 
 **marketing/.env**
 
 ```env
-VITE_API_URL=http://localhost:8006
+API_URL=http://localhost:8006
 ```
 
 ## 🏃 Running the Project

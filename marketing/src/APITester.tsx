@@ -12,11 +12,11 @@ export function APITester() {
     setResponse("");
 
     try {
-      const response = await axios.post(`${import.meta.env.API_URL}/verify`, {
+      const response = await axios.post(`${process.env.API_URL}/verify`, {
         email,
       }, {
         headers: {
-          "Authorization": `Bearer ${import.meta.env.API_KEY}`,
+          "Authorization": `Bearer ${process.env.API_KEY}`,
         },
       });
 
