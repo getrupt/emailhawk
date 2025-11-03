@@ -45,7 +45,7 @@ export function SecurityPage() {
           </h2>
           <p className="text-gray-300 mb-6">
             If you discover a security vulnerability, please email us at
-            security@emailhawk.com. We take all reports seriously and will respond
+            security@emailhawk.dev. We take all reports seriously and will respond
             promptly.
           </p>
         </div>

@@ -29,7 +29,7 @@ export function CompliancePage() {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Contact</h2>
           <p className="text-gray-300 mb-6">
             For compliance-related inquiries, please contact us at
-            compliance@emailhawk.com
+            compliance@emailhawk.dev
           </p>
         </div>
       </div>

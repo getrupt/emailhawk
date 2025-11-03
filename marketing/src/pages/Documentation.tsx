@@ -17,7 +17,7 @@ export function DocumentationPage() {
             <p className="text-gray-300">
               <strong className="text-white">Base URL:</strong>{" "}
               <code className="bg-black/30 px-2 py-1 rounded text-blue-400">
-                https://api.emailhawk.com
+                https://api.emailhawk.dev
               </code>
             </p>
           </div>
@@ -92,7 +92,7 @@ Authorization: Bearer YOUR_API_KEY`}</code>
               </p>
               <div className="bg-black/50 rounded-lg p-4 overflow-x-auto">
                 <pre className="text-sm text-gray-300">
-                  <code>{`curl -X POST https://api.emailhawk.com/verify \\
+                  <code>{`curl -X POST https://api.emailhawk.dev/verify \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -d '{
@@ -237,8 +237,8 @@ Authorization: Bearer YOUR_API_KEY`}</code>
             </p>
             <p className="text-gray-300">
               <strong className="text-white">Email:</strong>{" "}
-              <a href="mailto:support@emailhawk.com" className="text-blue-400 hover:text-blue-300">
-                support@emailhawk.com
+              <a href="mailto:support@emailhawk.dev" className="text-blue-400 hover:text-blue-300">
+                support@emailhawk.dev
               </a>
             </p>
           </div>

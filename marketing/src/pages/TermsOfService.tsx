@@ -51,7 +51,7 @@ export function TermsOfServicePage() {
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Contact Us</h2>
           <p className="text-gray-300 mb-6">
             If you have any questions about these Terms, please contact us at
-            legal@emailhawk.com
+            legal@emailhawk.dev
           </p>
         </div>
       </div>

@@ -125,7 +125,7 @@ The `APITester` component currently uses mock data. To connect to a real API:
 
 ```typescript
 // Replace this in APITester.tsx
-const res = await fetch('https://api.emailhawk.com/verify', {
+const res = await fetch('https://api.emailhawk.dev/verify', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ email })

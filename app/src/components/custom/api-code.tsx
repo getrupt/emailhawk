@@ -3,7 +3,7 @@ import { ButtonGroup, ButtonGroupItem } from "../base/button-group/button-group"
 import { useState } from "react";
 const codeJavaScript = `import axios from 'axios';
 
-const response = await axios.post('https://api.emailhawk.com/verify', {
+const response = await axios.post('https://api.emailhawk.dev/verify', {
   email: 'test@example.com'
 }, {
   headers: {
@@ -13,14 +13,14 @@ const response = await axios.post('https://api.emailhawk.com/verify', {
 
 const codePython = `import requests
 
-response = requests.post('https://api.emailhawk.com/verify', json={
+response = requests.post('https://api.emailhawk.dev/verify', json={
   'email': 'test@example.com'
 }, headers={
   'Authorization': 'Bearer YOUR_API_KEY'
 });`;
 
 const codePHP = `<?php
-$response = requests.post('https://api.emailhawk.com/verify', json={
+$response = requests.post('https://api.emailhawk.dev/verify', json={
   'email': 'test@example.com'
 }, headers={
   'Authorization': 'Bearer YOUR_API_KEY'

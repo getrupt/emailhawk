@@ -20,8 +20,8 @@ export function CareersPage() {
         <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
           <p className="text-gray-300">
             Send your resume and cover letter to:{" "}
-            <a href="mailto:careers@emailhawk.com" className="text-blue-400 hover:text-blue-300">
-              careers@emailhawk.com
+            <a href="mailto:careers@emailhawk.dev" className="text-blue-400 hover:text-blue-300">
+              careers@emailhawk.dev
             </a>
           </p>
         </div>
