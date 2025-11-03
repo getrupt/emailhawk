@@ -1,14 +1,56 @@
 # EmailHawk 🦅
 
-> A fully open-source, production-ready email validation service built with Node.js and Bun.
+> A production-ready email validation service built with Node.js and Bun that helps you verify email addresses in real-time.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Bun](https://img.shields.io/badge/Bun-1.0+-black?logo=bun)](https://bun.sh)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?logo=typescript)](https://www.typescriptlang.org/)
 
+## 🚀 Quick Start
+
+### API Endpoint
+
+```bash
+POST https://api.emailhawk.com/verify
+```
+
+### Example Request
+
+```bash
+curl -X POST https://api.emailhawk.com/verify \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user@example.com"}'
+```
+
+### Example Response
+
+```json
+{
+  "valid": true,
+  "email": "user@example.com",
+  "disposable": false,
+  "webmail": false,
+  "gibberish": false,
+  "mx_records": true,
+  "smtp_valid": true
+}
+```
+
+## ✨ Features
+
+EmailHawk performs comprehensive email validation through multiple checks:
+
+- ✅ **SMTP Verification** - Validates email addresses by connecting to the mail server
+- 📮 **MX Record Checks** - Verifies that the domain has valid mail exchange records
+- 🎲 **Gibberish Detection** - Identifies random or nonsensical email addresses
+- 🚫 **Disposable Email Detection** - Checks against multiple lists of temporary email providers
+- 📧 **Webmail Detection** - Identifies popular webmail providers (Gmail, Yahoo, Outlook, etc.)
+- 🎯 **Catch-All Detection** - Coming soon! Identifies domains that accept all email addresses
+
 ## 📖 About
 
-EmailHawk is a comprehensive, self-hosted email validation solution that helps you verify email addresses in real-time. Built from the ground up to be developer-friendly, fast, and easy to deploy.
+EmailHawk is a comprehensive, self-hosted email validation solution built from the ground up to be developer-friendly, fast, and easy to deploy.
 
 ### Why EmailHawk?
 
@@ -16,7 +58,7 @@ We created EmailHawk to address two major pain points in the email validation la
 
 1. **Fragmented Solutions** - Most email validation services are locked behind paywalls and buried within bloated SaaS platforms offering dozens of unrelated features. Finding, understanding, and integrating these services is unnecessarily complex.
 
-2. **Need for Simplicity** - We needed a single, dedicated, open-source product that is:
+2. **Need for Simplicity** - We needed a single, dedicated product that is:
    - ✅ Easy to host
    - ✅ Quick to build
    - ✅ Fast to get started
@@ -44,9 +86,8 @@ emailhawk/
 | **App**       | User dashboard for managing projects, API keys, and viewing usage analytics    | React, TypeScript, Vite            |
 | **Marketing** | Public-facing landing page with product information and pricing                | React, TypeScript, Vite            |
 
-## 🚀 Features
+## 🎯 Additional Features
 
-- 🔍 **Real-time Email Validation** - Verify email addresses using DNS checks, MX records, and disposable email detection
 - 🔐 **Authentication & Authorization** - Secure user management with Bearer tokens and API keys
 - 📊 **Usage Analytics** - Track validation requests with detailed metrics and activity logs
 - 💳 **Billing Integration** - Built-in Stripe integration for subscription management
@@ -215,27 +256,7 @@ EmailHawk supports two authentication methods:
 1. **Bearer Token** - For user authentication
 2. **API Key** - For programmatic access
 
-### Example: Verify Email
-
-```bash
-curl -X POST http://localhost:8006/verify \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"email": "user@example.com"}'
-```
-
-### Response
-
-```json
-{
-  "valid": true,
-  "email": "user@example.com",
-  "disposable": false,
-  "mx_records": true
-}
-```
-
-For complete API documentation, see [API Documentation](./api/README.md).
+For complete API documentation and more examples, see [API Documentation](./api/README.md).
 
 ## 📁 Project Structure
 
@@ -311,8 +332,8 @@ Built with:
 
 ## 📬 Contact & Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/emailhawk/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/emailhawk/discussions)
+- **Issues**: [GitHub Issues](https://github.com/getrupt/emailhawk/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/getrupt/emailhawk/discussions)
 
 ---
 
