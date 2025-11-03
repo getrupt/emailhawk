@@ -11,29 +11,33 @@
 ### API Endpoint
 
 ```bash
-POST https://api.emailhawk.com/verify
+POST https://api.emailhawk.dev/verify
 ```
 
 ### Example Request
 
 ```bash
-curl -X POST https://api.emailhawk.com/verify \
+curl -X POST https://api.emailhawk.dev/verify \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"email": "user@example.com"}'
+  -d '{"email": "ahmed@rupt.dev"}'
 ```
 
 ### Example Response
 
 ```json
 {
-  "valid": true,
-  "email": "user@example.com",
+  "status": "valid",
+  "regexp": true,
+  "gibberish": false,
   "disposable": false,
   "webmail": false,
-  "gibberish": false,
   "mx_records": true,
-  "smtp_valid": true
+  "smtp_server": true,
+  "smtp_check": true,
+  "accept_all": false,
+  "block": false,
+  "domain": "rupt.dev"
 }
 ```
 

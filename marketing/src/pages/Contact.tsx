@@ -12,7 +12,7 @@ export function ContactPage() {
         </div>
         <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
           <p className="text-gray-300 mb-4">
-            <strong className="text-white">Email:</strong> support@emailhawk.com
+            <strong className="text-white">Email:</strong> support@emailhawk.dev
           </p>
           <p className="text-gray-300 mb-4">
             <strong className="text-white">Support:</strong> Available Monday-Friday,
@@ -20,7 +20,7 @@ export function ContactPage() {
           </p>
           <p className="text-gray-300">
             For enterprise inquiries or custom solutions, please contact us
-            directly at enterprise@emailhawk.com
+            directly at enterprise@emailhawk.dev
           </p>
         </div>
       </div>

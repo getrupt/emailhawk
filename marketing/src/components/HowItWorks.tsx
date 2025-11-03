@@ -31,7 +31,7 @@ export function HowItWorks() {
               </p>
               <div className="w-full bg-[#1a1a1a] rounded-lg p-4 border border-white/10 text-left">
                 <code className="text-sm text-blue-300">
-                  <div className="text-gray-500">POST https://api.emailhawk.com/verify</div>
+                  <div className="text-gray-500">POST https://api.emailhawk.dev/verify</div>
                   <div className="text-gray-500">Authorization: Bearer YOUR_API_KEY</div>
                   <div className="mt-2">{"{"}</div>
                   <div className="ml-4">
