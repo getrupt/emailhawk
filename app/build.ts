@@ -150,8 +150,8 @@ const result = await build({
   sourcemap: "linked",
   define: {
     "process.env.NODE_ENV": JSON.stringify("production"),
-    "import.meta.env.API_URL": JSON.stringify(process.env.API_URL || ""),
   },
+  env: "inline",
   ...cliConfig, // Merge in any CLI-provided options
 });
 
