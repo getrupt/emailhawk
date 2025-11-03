@@ -12,30 +12,13 @@ export function APITester() {
     setResponse("");
 
     try {
-      // Simulate API call - in production, this would call your actual API
-      // await new Promise((resolve) => setTimeout(resolve, 800));
-      const response = await axios.post(`https://api.emailhawk.dev/verify`, {
+      const response = await axios.post(`${import.meta.env.API_URL}/verify`, {
         email,
       }, {
         headers: {
-          "Authorization": `Bearer 1a9b86805a811529f2668384938adae72454aa8ccbced98c17d9f776273e517b32c483490b6d173e6e5712d9827c37f7`,
+          "Authorization": `Bearer ${import.meta.env.API_KEY}`,
         },
       });
-
-      // Mock response
-      // const mockResponse = {
-      //   "status": "valid",
-      //   "regexp": true,
-      //   "gibberish": false,
-      //   "disposable": false,
-      //   "webmail": false,
-      //   "mx_records": true,
-      //   "smtp_server": true,
-      //   "smtp_check": true,
-      //   "accept_all": false,
-      //   "block": false,
-      //   "domain": email.split("@")[1] || ""
-      // };
 
       setResponse(JSON.stringify(response.data, null, 2));
     } catch (error) {
