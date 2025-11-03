@@ -1,4 +1,5 @@
 import React, { useState, type FormEvent } from "react";
+import axios from "axios";
 
 export function APITester() {
   const [email, setEmail] = useState("");
@@ -11,25 +12,15 @@ export function APITester() {
     setResponse("");
 
     try {
-      // Simulate API call - in production, this would call your actual API
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      const response = await axios.post(`${import.meta.env.API_URL}/verify`, {
+        email,
+      }, {
+        headers: {
+          "Authorization": `Bearer ${import.meta.env.API_KEY}`,
+        },
+      });
 
-      // Mock response
-      const mockResponse = {
-        "status": "valid",
-        "regexp": true,
-        "gibberish": false,
-        "disposable": false,
-        "webmail": false,
-        "mx_records": true,
-        "smtp_server": true,
-        "smtp_check": true,
-        "accept_all": false,
-        "block": false,
-        "domain": email.split("@")[1] || ""
-      };
-
-      setResponse(JSON.stringify(mockResponse, null, 2));
+      setResponse(JSON.stringify(response.data, null, 2));
     } catch (error) {
       setResponse(`Error: ${String(error)}`);
     } finally {
@@ -135,8 +126,8 @@ export function APITester() {
           {[
             "user@gmail.com",
             "test@fake-email.com",
-            "invalid-email",
-            "contact@company.io",
+            "test@mailinator.com",
+            "test@example.com",
           ].map((example) => (
             <button
               key={example}

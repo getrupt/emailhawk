@@ -7,6 +7,9 @@ app = 'marketing-weathered-fog-3274'
 primary_region = 'sjc'
 
 [build]
+  [build.args]
+    # Configure your API URL here - update after deploying your API
+    API_URL = "https://api.emailhawk.dev"
 
 [http_service]
   internal_port = 8080
