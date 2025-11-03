@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const LoginSimple = () => {
   const [searchParams] = useSearchParams();
@@ -18,6 +18,24 @@ export const LoginSimple = () => {
   if (queryAction === "logout") {
     cookies.remove("token", { path: "/", domain: "" });
   }
+
+  useEffect(() => {
+    if (!cookies.get("token")) {
+      return;
+    }
+
+    axios.get("/auth/user", {
+      headers: {
+        Authorization: `Bearer ${cookies.get("token")}`,
+      },
+    })
+    .then((response) => {
+      navigate("/dashboard");
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  }, [cookies.get("token")]);
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-primary px-4 py-12 md:px-8 md:pt-24 w-[400px]">

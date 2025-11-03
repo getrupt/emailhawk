@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/base/buttons/button";
 import { Form } from "@/components/base/form/form";
 import { Input } from "@/components/base/input/input";
@@ -6,13 +6,31 @@ import { BackgroundPattern } from "@/components/shared-assets/background-pattern
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router";
-const cookies = new Cookies();
 
 export const RegisterSimple = () => {
   const [password, setPassword] = useState("");
   const [registerLoading, setRegisterLoading] = useState(false);
+  const cookies = new Cookies();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!cookies.get("token")) {
+      return;
+    }
+
+    axios.get("/auth/user", {
+      headers: {
+        Authorization: `Bearer ${cookies.get("token")}`,
+      },
+    })
+    .then((response) => {
+      navigate("/dashboard");
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  }, [cookies.get("token")]);
+  
   return (
     <section className="min-h-screen overflow-hidden bg-primary px-4 py-12 md:px-8 md:pt-24 w-[400px]">
       <div className="mx-auto flex w-full flex-col gap-8 sm:max-w-90">
