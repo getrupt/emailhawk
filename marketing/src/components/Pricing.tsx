@@ -31,7 +31,7 @@ export function Pricing() {
               First 100 free each month
             </div>
             <div className="text-4xl font-bold text-gray-300">
-              $0.01 per additional verification
+              $0.005 per additional verification
             </div>
           </div>
 
